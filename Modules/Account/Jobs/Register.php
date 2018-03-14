@@ -48,6 +48,7 @@ class Register
             'api_token' => str_random(60),
             'fb_id' => $this->data['fb_id'] ?? null,
             'twit_id' => $this->data['twit_id'] ?? null,
+            'referrer_id' => $this->data['referrer_id'] ?? null
         ]);
 
         $user->save();

@@ -53,4 +53,7 @@ mix
     .js('Vue/pages/jobs/job-listing.js', 'public/build/js/jobs/job-listings.min.js')
     .js('Vue/pages/jobs/manage-job-schedule.js', 'public/build/js/backend/jobs/manage-job-schedule.min.js')
     .js('Vue/pages/tickets/tickets.js', 'public/build/js/backend/tickets/tickets.min.js')
+    .js('Vue/pages/loyalty/loyalty.js', 'public/build/js/backend/loyalty/loyalty.min.js')
+    .js('Vue/pages/loyalty/credit-history.js', 'public/build/js/backend/loyalty/credit-history.min.js')
+    .js('Vue/pages/loyalty/redeem-credit.js', 'public/build/js/backend/loyalty/redeem-credit.min.js')
 ;

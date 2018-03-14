@@ -38,6 +38,12 @@
                        v-model="registration.retype_password" class="form-control" />
             </div>
 
+            <div class="col_full">
+                <label for="referral_code" class="t400">Referral Code:</label>
+                <input type="text" id="referral_code" name="referral_code"
+                       v-model="registration.referral_code" class="form-control" />
+            </div>
+
             <div class="col_full" v-show="registration.isEmployer">
                 <label class="t400">Company Name:</label>
                 <input type="text" name="company" placeholder=""
@@ -73,6 +79,7 @@
                     password : '',
                     retype_password : '',
                     company : '',
+                    referral_code : this.$root.getUrlVars()['ref'],
                     isEmployer : false
                 },
                 message : 'Working. Please wait...'

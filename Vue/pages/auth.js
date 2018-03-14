@@ -1,10 +1,13 @@
 new window.App({
     el: '#auth',
-    data : function(){
+    data: {
+      page: 'login'
+    },
+/*    data : function(){
         return {
             page: 'login'
         }
-    },
+    },*/
     methods : {
         togglePage: function () {
             if(this.page === 'login'){

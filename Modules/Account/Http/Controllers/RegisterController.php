@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Modules\Account\Jobs\Register;
 use Modules\Account\Repositories\AccountRepository;
+use Modules\Loyalty\Models\Referral;
 use Modules\Users\Http\Resources\UserAccountResource;
 use Modules\Users\Models\User;
 use Carbon\Carbon;
@@ -38,6 +39,8 @@ class RegisterController extends Controller
         $company = request()->get('company') ?? null;
 
         if($company) $data['company'] = $company;
+
+        $data['referrer_id'] = optional(Referral::where('code', request()->get('referral_code'))->first())->user_id;
 
         publish(new Register($data));
 
