@@ -53,4 +53,10 @@ mix
     .js('Vue/pages/jobs/job-listing.js', 'public/build/js/jobs/job-listings.min.js')
     .js('Vue/pages/jobs/manage-job-schedule.js', 'public/build/js/backend/jobs/manage-job-schedule.min.js')
     .js('Vue/pages/tickets/tickets.js', 'public/build/js/backend/tickets/tickets.min.js')
+    .js('Vue/pages/profile/profile.js', 'public/build/js/backend/profile/profile.min.js')
+    .js('Vue/pages/profile/delete-request.js', 'public/build/js/backend/profile/delete-request.min.js')
+    .js('Vue/pages/profile/users.js', 'public/build/js/backend/profile/users.min.js')
+    .js('Vue/pages/profile/phone.js', 'public/build/js/backend/profile/phone.min.js')
+    .js('Vue/pages/profile/email.js', 'public/build/js/backend/profile/email.min.js')
+    .js('Vue/pages/users/index.js', 'public/build/js/backend/users/index.min.js')
 ;

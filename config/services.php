@@ -19,6 +19,12 @@ return [
         'secret' => env('MAILGUN_SECRET'),
     ],
 
+    'twilio' => [
+        'from'    => env('TWILIO_FROM'),
+        'token'   => env('TWILIO_TOKEN'),
+        'account' => env('TWILIO_ACCOUNT'),
+    ],
+
     'ses' => [
         'key' => env('SES_KEY'),
         'secret' => env('SES_SECRET'),

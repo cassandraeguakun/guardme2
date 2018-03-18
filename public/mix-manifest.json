@@ -12,7 +12,13 @@
     "/build/js/jobs/job-details.min.js": "/build/js/jobs/job-details.min.js",
     "/build/js/backend/jobs/active-schedule.min.js": "/build/js/backend/jobs/active-schedule.min.js",
     "/build/js/backend/dashboard.min.js": "/build/js/backend/dashboard.min.js",
+    "/build/js/backend/users/index.min.js": "/build/js/backend/users/index.min.js",
     "/build/js/backend/tickets/tickets.min.js": "/build/js/backend/tickets/tickets.min.js",
+    "/build/js/backend/profile/users.min.js": "/build/js/backend/profile/users.min.js",
+    "/build/js/backend/profile/profile.min.js": "/build/js/backend/profile/profile.min.js",
+    "/build/js/backend/profile/phone.min.js": "/build/js/backend/profile/phone.min.js",
+    "/build/js/backend/profile/email.min.js": "/build/js/backend/profile/email.min.js",
+    "/build/js/backend/profile/delete-request.min.js": "/build/js/backend/profile/delete-request.min.js",
     "/build/css/site.vendors.bundle.min.css": "/build/css/site.vendors.bundle.min.css",
     "/build/js/app.vendors.bundle.js": "/build/js/app.vendors.bundle.js",
     "/build/js/site.vendors.bundle.min.js": "/build/js/site.vendors.bundle.min.js"

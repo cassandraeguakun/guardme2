@@ -17,6 +17,8 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
+    private $suspended = false;
+
     protected function attemptLogin(Request $request)
     {
         $credentials = $request->all();
@@ -24,12 +26,24 @@ class LoginController extends Controller
         if(filter_var($credentials['email'], FILTER_VALIDATE_EMAIL)) {
             //user sent their email
             $loggedIn = $this->guard()->attempt(['email' => $credentials['email'], 'password' => $credentials['password']]);
+
+            $user = User::where('email', $credentials['email'])->first();
         } else {
             //they sent their username instead
             $loggedIn = $this->guard()->attempt(['username' => $credentials['email'], 'password' => $credentials['password']]);
+
+            $user = User::where('username', $credentials['email'])->first();
         }
 
-        return $loggedIn;
+        if (!in_array($user->status, [User::STATUS_APPROVED, User::STATUS_UNVERIFIED, User::STATUS_DISAPPROVED])) {
+            $loggedIn = false;
+
+            auth()->logout();
+        }
+
+        $this->suspended = $user->status == User::STATUS_SUSPENDED;
+
+        return $loggedIn && !$this->suspended;
     }
 
     protected function validateLogin(Request $request)
@@ -86,7 +100,7 @@ class LoginController extends Controller
         if($request->ajax()){
             return response()->json([
                 'hasError' => true,
-                'message' => 'Invalid username and/or password',
+                'message' => $this->suspended ? 'Your account has been suspended. Please contact the support.' : 'Invalid username and/or password',
             ],422);
         }
 
