@@ -38,18 +38,13 @@
                        v-model="registration.retype_password" class="form-control" />
             </div>
 
-            <div class="col_full">
-                <label for="referral_code" class="t400">Referral Code:</label>
-                <input type="text" id="referral_code" name="referral_code"
-                       v-model="registration.referral_code" class="form-control" />
-            </div>
-
             <div class="col_full" v-show="registration.isEmployer">
                 <label class="t400">Company Name:</label>
                 <input type="text" name="company" placeholder=""
                        v-model="registration.company" class="form-control" />
             </div>
 
+            <input hidden type="text" id="referral_code" name="referral_code" v-model="registration.referral_code" class="form-control" />
             <div class="col_full nobottommargin">
                 <button class="button button-rounded t400 nomargin" id="reg-form-submit"
                         type="submit">Register</button>

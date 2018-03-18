@@ -18,4 +18,5 @@ Route::group(['prefix' => 'loyalty', 'namespace' => 'Web', 'middleware' => 'auth
     Route::get('/redeem-credit', 'LoyaltyController@redeemCredit')->name('loyalty.redeemCredit');
     Route::get('/redeem-credit/{id}', 'LoyaltyController@getRedeemCreditById')->name('loyalty.getRedeemCreditById');
     Route::post('/redeem-credit', 'LoyaltyController@submitRedeemCredit')->name('loyalty.submitRedeemCredit');
+    Route::get('/getRandom4', 'LoyaltyController@getRandom4')->name('loyalty.getRandom4');
 });

@@ -22,6 +22,7 @@ new window.App({
             if(response.data.status === 1){
               vm.copyBtn = true
               vm.copyText = 'copy'
+              vm.url = response.data.code
             }
           })
     },
@@ -49,6 +50,13 @@ new window.App({
       }
 
       document.body.removeChild(textArea);
+    },
+    random4(){
+      let vm = this
+      window.axios.get('/loyalty/getRandom4')
+          .then(function (response) {
+            vm.url = response.data.data.number
+          })
     }
   },
   components : {
@@ -58,6 +66,6 @@ new window.App({
 
   },
   mounted : function(){
-
+    this.random4()
   },
 });

@@ -35,19 +35,14 @@ class LoyaltyController extends Controller
 
     public function insertReferralCode()
     {
-        $code = request('code');
-        $exist = Referral::where('code', $code)->get()->count();
-
-        if($exist > 0){
-            return response()->json(['status' => 0, 'message' => 'Referral code exists, Please insert another referral code']);
-        }
+        $code = $this->loyalty->referralCodeCheck(request('code'));
 
         Referral::create([
             'user_id' => auth()->user()->id,
             'code' => $code
         ]);
 
-        return response()->json(['status' => 1, 'message' => 'Successfully inserted Referral Code']);
+        return response()->json(['status' => 1, 'message' => 'Successfully inserted Referral Code', 'code' => $code]);
     }
 
     public function creditHistory()
@@ -79,5 +74,11 @@ class LoyaltyController extends Controller
         ];
         $this->loyalty->storeRedeemCredit($store);
         return redirect()->back();
+    }
+
+    public function getRandom4()
+    {
+        $number = $this->loyalty->generateRandom4();
+        return response()->json(['status' => true, 'data' => ['number' => $number]]);
     }
 }

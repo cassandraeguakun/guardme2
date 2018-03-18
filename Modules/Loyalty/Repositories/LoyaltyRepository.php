@@ -85,4 +85,27 @@ class LoyaltyRepository
         $result = array_merge($store, $data);
         return ReferralCredit::where('id', $store['id'])->update($result);
     }
+
+    public function referralCodeCheck($code)
+    {
+        $count = Referral::where('code', $code)->get()->count();
+        if($count > 0) {
+            return $this->generateRandom4();
+        }
+        return $code;
+    }
+
+    public function generateRandom4()
+    {
+        $number = "";
+        for ($i = 0; $i < 4; $i++) {
+            $min = ($i == 0) ? 1 : 0;
+            $number .= mt_rand($min, 9);
+        }
+
+        $count = Referral::where('code', $number)->get()->count();
+        if($count > 0) $this->generateRandom4();
+
+        return $number;
+    }
 }

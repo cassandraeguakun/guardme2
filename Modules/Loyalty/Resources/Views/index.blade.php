@@ -5,7 +5,7 @@
     <div class="col-md-8" style="margin-bottom: 10px;">
         <form class="form-inline">
             <div class="form-group">
-                <input v-model="url" type="text" class="form-control" name="url" id="url" placeholder="Referral Code">
+                <input readonly v-model="url" type="text" class="form-control" name="url" id="url" placeholder="Referral Code">
                 <button type="button" data-toggle="modal" @click="saveUrlButton" class="btn btn-primary">Save</button>
             </div>
         </form>
