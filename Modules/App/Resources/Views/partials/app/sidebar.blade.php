@@ -39,9 +39,23 @@
 
                 <ul class="nav nav-second-level">
                     <li><a href="/account/profile"><i class="fa fa-user"></i> Profile</a></li>
-                    <li><a href="/account/profile/edit"><i class="fa fa-edit"></i> Edit profile</a></li>
-                    <li><a href="/account/feedback"><i class="fa fa-reply"></i> Feedback</a></li>
-                    <li><a href="/account/delete"><i class="fa fa-remove"></i> Delete Account</a></li>
+                    <li><a href="/account/profile/verification"><i class="fa fa-check"></i> Verification</a></li>
+                    {{--<li><a href="/account/feedback"><i class="fa fa-reply"></i> Feedback</a></li>--}}
+                    <li><a href="/account/profile/delete"><i class="fa fa-remove"></i> Delete Account</a></li>
+                    @if(hasRole(config('guardme.acl.Admin')))
+                    <li>
+                        <a href="/account/profile/users">
+                            <i class="fa fa-users"></i>
+                            <span class="hide-menu"> Manage Users <span class="fa arrow"></span></span>
+                        </a>
+
+                        <ul class="nav nav-third-level">
+                            <li><a href="/account/profile/users"> All Users</a></li>
+                            <li><a href="/account/profile/users/suspended"> Suspended Accounts</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/account/profile/users/employers"><i class="fa fa-users"></i> Employers</a></li>
+                    @endif
                 </ul>
             </li>
 
@@ -139,6 +153,15 @@
 
                 </a>
             </li>
+
+            @if(hasRole(config('guardme.acl.Admin')) || hasRole(config('guardme.acl.Super_Admin')))
+            <li>
+                <a href="/users" class="{{ isPath('users') ? 'active' : '' }} ">
+                    <i class="fa fa-users"></i>
+                    <span class="hide-menu"> Users</span>
+                </a>
+            </li>
+            @endif
 
             @if(hasRole(config('guardme.acl.Super_Admin')))
             <li>

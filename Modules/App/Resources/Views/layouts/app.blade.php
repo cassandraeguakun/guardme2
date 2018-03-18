@@ -24,6 +24,7 @@
     <div class="cssload-speeding-wheel"></div>
 </div>
 <div id="app">
+    @stack('modals')
     <!-- Top Navigation -->
     <nav class="navbar navbar-default navbar-static-top m-b-0">
         <div class="navbar-header">
@@ -99,6 +100,15 @@
     <!-- Page Content -->
     <div id="page-wrapper" style="padding-bottom: 0px;">
         <div class="container-fluid">
+        @if (auth()->user()->isDisapproved())
+        <div class="alert alert-warning" role="alert">Your account needs to be verified.</div>
+        @endif
+
+        @if (! auth()->user()->email_verified)
+            <div class="alert alert-warning" role="alert">
+                <strong>Warning</strong> You need verify your e-mail address. <a href="/confirm/resend">Send confirmation letter again.</a>
+            </div>
+        @endif
         @yield('app')
         <!-- .right-sidebar -->
             <div class="right-sidebar">

@@ -9,6 +9,7 @@
                     </a>
                     <h4 class="text-white">{{ profile.username }}</h4>
                     <h5 class="text-white">{{ profile.email }}</h5>
+                    <div v-if="profile.is_approved" class="text-success"><i class="fa fa-check"></i> Approved</div>
                 </div>
             </div>
         </div>
