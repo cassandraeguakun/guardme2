@@ -2,8 +2,11 @@
 
 @section('app')
 
-    <h1>Create ticket
-        <a class="btn btn-secondary pull-right" href="{{ Route('ticket.index') }}">&larr; Back to tickets</a>
+    @php
+        $pageTitle = 'Create ticket';
+    @endphp
+    <h1 class="uk-text-right">
+        <a class="btn btn-secondary" href="{{ Route('ticket.index') }}">&larr; Back to tickets</a>
     </h1>
 
     @if (session('status') == 500)

@@ -46,12 +46,16 @@ class JobRepository
             'description' => $data['description'],
             'starts' => to_db_datetime($data['date']['start']),
             'ends' => to_db_datetime($data['date']['end']),
-            'wages' => $data['wages'],
+            'offer' => $data['offer'],
             'rating' => $data['rating'],
             'postcode' => $data['postcode'],
             'metadata' => json_encode([
                 'broadcasts_config' => $data['broadcastsConfig'],
                 'address' => $data['address'],
+                'location' => [
+                    'latitude' => $data['latitude'],
+                    'longitude' => $data['longitude'],
+                ]
             ])
         ]);
 
@@ -93,10 +97,10 @@ class JobRepository
         }
 
         if(request('min_offer')){
-            $query = $query->where('wages', '>=', request('min_offer'));
+            $query = $query->where('offer', '>=', request('min_offer'));
         }
         if(request('max_offer')){
-            $query = $query->where('wages', '<=', request('max_offer'));
+            $query = $query->where('offer', '<=', request('max_offer'));
         }
 
         return $query->simplePaginate($limit);
@@ -122,6 +126,16 @@ class JobRepository
         return $query->simplePaginate($limit);
     }
 
+    public function getJobEmployees($job_id, $limit = 10, &$total_employees = 0)
+    {
+        $query = $this->job
+            ->find($job_id)
+            ->employees();
+
+        $total_employees = $query->count();
+
+        return $query->simplePaginate($limit);
+    }
 
     /**
      * Gets available jobs for a user

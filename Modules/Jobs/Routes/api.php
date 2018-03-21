@@ -6,8 +6,15 @@ Route::group(['prefix' => 'jobs', 'middleware' => 'auth:api'], function(){
 
     Route::get('{user_id}/job-profile', 'JobsController@getUserJobProfile');
 
-    Route::post('/{job_id}/auth/apply', 'JobsController@applyToJob');
-    Route::get('/{job_id}/applicants', 'JobsController@getJobApplicants');
+    Route::post('/{job_id}/apply', 'ApplyController@applyToJob');
+
+    Route::post('/{job_id}/hire', 'HireController@hireUser');
+
+    Route::get('/{job_id}/applicants', 'ApplyController@getJobApplicants');
+    Route::get('/{job_id}/employees', 'HireController@getJobEmployees');
+
+    Route::get('/{job_id}/mark-complete', 'JobsController@markJobAsComplete');
+    Route::get('/{job_id}/unmark-complete', 'JobsController@unMarkJobAsComplete');
 
 });
 Route::get('/jobs/listings', 'JobsController@getJobListings');

@@ -2,7 +2,9 @@
 
 @section('app')
 
-    <h1>Ticket '{{ $ticket->title }}'</h1>
+    @php
+        $pageTitle = 'Ticket: ' . $ticket->title;
+    @endphp
 
     @if (!session('errors') && session('type'))
         <div class="alert alert-success">
@@ -14,11 +16,11 @@
         </div>
     @endif
 
-    <?
+    @php
         $user = auth()->user();
-        $userId = $user->id;
-    ?>
-    <? $firstMessage = $messages->shift() ?? null ?>
+		$userId = $user->id;
+        $firstMessage = $messages->shift() ?? null;
+    @endphp
 
     <div class="panel">
         <div class="panel-heading">

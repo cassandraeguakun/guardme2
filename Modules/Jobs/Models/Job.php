@@ -15,6 +15,14 @@ class Job extends Model
 
     protected $table = 'jobs';
 
+    protected $casts = [
+        'completed' => 'boolean'
+    ];
+
+    public $dates = [
+        'completed_at'
+    ];
+
     public function getMetadataAttribute($value){
         if($value){
             return json_decode($value, true);
@@ -46,6 +54,12 @@ class Job extends Model
     public function applicants()
     {
         return $this->belongsToMany(User::class,'job_applications_pivot','job_id','user_id')
-            ->withPivot('bid','bid_at');
+            ->withPivot('bid','applied_at');
+    }
+
+    public function employees()
+    {
+        return $this->belongsToMany(User::class,'job_employees_pivot','job_id','user_id')
+            ->withPivot('wages','hired_at');
     }
 }

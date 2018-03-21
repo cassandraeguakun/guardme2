@@ -49,7 +49,6 @@ class UserJobProfileResource extends Resource
             'id' => $this->id,
             'username' => $this->username,
             'email' => $this->email,
-            'is_approved' => $this->isApproved(),
             'primaryRole' => new RoleResource($this->getPrimaryRole()),
             'stats' => $this->when($can_return_stats, [
                 'jobs' => $active_job_count ?? 0

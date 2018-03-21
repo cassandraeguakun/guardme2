@@ -13,6 +13,7 @@
 
 Route::group(['prefix' => 'jobs', 'middleware' => 'auth'], function () {
     Route::get('/new', 'JobsController@newJobPage');
+    Route::get('{job_slug}/payment', 'JobPaymentController@jobPaymentPage');
 });
 
 Route::group(['prefix' => 'account/jobs', 'middleware' => 'auth'], function () {
