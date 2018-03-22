@@ -9,7 +9,8 @@
                     </a>
                     <h4 class="text-white">{{ profile.username }}</h4>
                     <h5 class="text-white">{{ profile.email }}</h5>
-                    <div v-if="profile.is_approved" class="text-success"><i class="fa fa-check"></i> Approved</div>
+                    <div v-if="profile.is_approved" class="text-success"><i class="fa fa-check"></i> Verified</div>
+                    <div v-if="!profile.is_approved" class="text-warning"><i class="fa fa-warn"></i> Unverified</div>
                 </div>
             </div>
         </div>
