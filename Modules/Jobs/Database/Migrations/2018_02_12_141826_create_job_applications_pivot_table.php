@@ -22,7 +22,7 @@ class CreateJobApplicationsPivotTable extends Migration
 
             $table->double('bid')->default(0);
 
-            $table->date('bid_at');
+            $table->date('applied_at');
 
         });
     }
