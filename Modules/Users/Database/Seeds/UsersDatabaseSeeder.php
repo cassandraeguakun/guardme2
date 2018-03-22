@@ -25,7 +25,7 @@ class UsersDatabaseSeeder extends Seeder
                 'username' => 'admin',
                 'email' => 'admin@example.com',
                 'api_token' => str_random(60),
-                'remember_token' => str_random(10),
+                'remember_token' => str_random(10)
             ],
             [
                 'password' => bcrypt('12345'),

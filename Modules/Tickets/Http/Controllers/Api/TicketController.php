@@ -40,7 +40,7 @@ class TicketController extends Controller
 
     public function store(Request $request)
     {
-        if (!$this->checkRole(['Job seeker', 'Employer'])) {
+        if (!$this->checkRole([config('guardme.acl.Job_Seeker'), config('guardme.acl.Employer')])) {
             abort(404);
         }
 
@@ -54,7 +54,7 @@ class TicketController extends Controller
 
     public function show($id)
     {
-        if ($this->checkRole(['Job seeker', 'Employer']) && $this->validationShow($id)) {
+        if ($this->checkRole([config('guardme.acl.Job_Seeker'), config('guardme.acl.Employer')]) && $this->validationShow($id)) {
             abort(404);
         }
 

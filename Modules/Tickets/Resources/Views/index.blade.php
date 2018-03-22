@@ -2,15 +2,20 @@
 
 @section('app')
     <?php
+    $pageTitle = 'Tickets';
         $user = auth()->user();
         $userId = $user->id;
         $userName = $user->username;
-        $isRole = $user->inRoles(['Partner', 'Admin']);
+        $isRole = $user->inRoles([
+            config('guardme.acl.License_partner'),
+            config('guardme.acl.Admin'),
+            config('guardme.acl.Super_Admin')
+        ]);
     ?>
 
-    <h1>Tickets
+    <h1 class="uk-text-right">
         @if (!$isRole)
-            <a class="btn btn-secondary pull-right" href="{{ Route('ticket.create') }}">Create ticket</a>
+            <a class="btn btn-secondary" href="{{ Route('ticket.create') }}">Create ticket</a>
         @endif
     </h1>
 

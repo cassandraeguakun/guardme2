@@ -7,14 +7,7 @@
             <div class="listing-item" v-for="job in jobs.data" :class="{'ui loading' : jobs.loading}">
 
                <div class="row">
-                  <div class="col-sm-4">
-                     <google-map :name="job.id"
-                                 :height="250"
-                                 :markers="[{latitude: job.address.coord.latitude,
-                                        longitude: job.address.coord.longitude}]">
-                     </google-map>
-                  </div>
-                  <div class="col-sm-8">
+                  <div class="col-sm-9">
                      <div class="fancy-title title-bottom-border">
                         <h3 class="uk-text-truncate">
                            <a :href="'/jobs/' + job.slug">
@@ -33,17 +26,19 @@
                      <p class="list-description" v-html="job.description"></p>
 
                      <div class="mt-3">
+                        @if(hasRole(config('guardme.acl.Job_Seeker')))
                         <a class="ui label tiny black"
                            v-if="!job.applied"
-                           @click="applyToJob(job)">
+                           @click="submitApplication(job)">
                            Apply Now
                         </a>
-                        <span v-else class="ui success image label tiny">
-                           <i class="icon check"></i> applied
-                        </span>
+                           <span v-else class="ui success image label tiny">
+                              <i class="icon check"></i> applied
+                           </span>
+                        @endif
 
                         <span class="ui blue image label tiny">
-                           £@{{ job.wages }}
+                           £@{{ job.offer }}
                            <div class="detail">Hourly</div>
                         </span>
 
@@ -103,7 +98,7 @@
                   <div class="row">
                      <div class="col_full">
                         <label class="t400">Offer (£):</label>
-                        <input type="text" placeholder="" :value="selectedJob ? selectedJob.wages : 0"
+                        <input type="text" placeholder="" :value="selectedJob ? selectedJob.offer : 0"
                                disabled class="form-control" />
                      </div>
 
