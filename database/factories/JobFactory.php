@@ -10,7 +10,7 @@ $factory->define(\Modules\Jobs\Models\Job::class, function (Faker $faker) {
         'description' => $faker->paragraph(8),
         'starts' => $faker->dateTime(),
         'ends' => $faker->dateTime(),
-        'wages' => $faker->numberBetween(7, 15),
+        'offer' => $faker->numberBetween(7, 15),
         'rating' => $faker->numberBetween(3, 5),
         'postcode' => $faker->postcode,
     ];

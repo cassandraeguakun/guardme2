@@ -19,13 +19,19 @@ class CreateJobsTable extends Migration
             $table->string('slug');
             $table->longText('description');
             $table->string('postcode');
-            $table->time('starts');
-            $table->time('ends');
+            $table->dateTime('starts');
+            $table->dateTime('ends');
             $table->integer('rating')->default(0);
-            $table->double('wages')->default(8);
+            $table->double('offer')->default(8);
 
             $table->integer('company_id')->unsigned();
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
+
+            $table->boolean('completed')->default(false); // i.e. job is done and completed
+            $table->dateTime('completed_at')->nullable();
+
+            $table->boolean('paid')->default(false); // i.e. job has been paid for
+            $table->dateTime('paid_at')->nullable();
 
             $table->longText('metadata')->nullable();
 

@@ -1,5 +1,5 @@
 require('../../public/assets/semantic-ui/semantic.min');
-require('../../node_modules/uikit/dist/js/uikit.min.js');
+window.UIkit = require('../../node_modules/uikit/dist/js/uikit.min.js');
 
 jQuery(document).ready(function(){
 

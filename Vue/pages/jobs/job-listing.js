@@ -86,7 +86,7 @@ new window.App({
         },
         filterJobs : _.debounce(function (newVal) {
             this.getJobListings(newVal)
-        }, 3000),
+        }, 2000),
         applyToJob : function (job) {
             if(!this.$root.app.user){
                 alert('Please login to place bid');
@@ -100,25 +100,30 @@ new window.App({
                 .modal('show')
             ;
         },
-        submitBid : function () {
+        submitApplication : function (job) {
             const vm = this;
 
-            window.axios.post('/api/jobs/' + vm.selectedJob.id + '/auth/apply', vm.application)
+            this.selectedJob = job;
+            this.application.job_id = job.id;
+            vm.$root.ukNotify('submitting application...');
+
+
+            window.axios.post('/api/jobs/' + vm.selectedJob.id + '/apply', vm.application)
                 .then(function (response) {
                     vm.deselectJob();
-                    vm.$root.ukNotify('Your bid was successfully submitted!');
+                    vm.$root.ukNotify('Application successfully submitted!');
                 });
 
-            var job = window._.find(vm.jobs.data, function (item) {
+            var applied_job = window._.find(vm.jobs.data, function (item) {
                 return item.id === vm.selectedJob.id;
             });
-            job.applied = true;
+            applied_job.applied = true;
         },
         deselectJob : function () {
 
-            $('.ui.modal.application')
+           /* $('.ui.modal.application')
                 .modal('hide')
-            ;
+            ;*/
             this.selectedJob = null;
             this.application.job_id = null;
             this.application.bid = 0;

@@ -6,6 +6,7 @@ use Caffeinated\Modules\Facades\Module;
 use Caffeinated\Modules\Modules;
 use Illuminate\Console\Command;
 use Modules\Account\Models\Role;
+use Modules\Users\Models\User;
 use Modules\Account\Repositories\PermissionRepository;
 
 class InstallSystem extends Command
@@ -69,6 +70,8 @@ class InstallSystem extends Command
         $bar->finish();
 
         $this->setupACL();
+		
+		$this->autoVerifyAllUsers();
     }
 
     private function setupACL(){
@@ -141,4 +144,22 @@ class InstallSystem extends Command
 
         $bar->finish();
     }
+	
+	
+	private function autoVerifyAllUsers(){
+		$this->alert('Auto-verifying dummy users...');
+		
+		$users = User::all();
+		
+		$bar = $this->output->createProgressBar($users->count());
+		foreach($users as $user){
+			$user->phone = mt_rand(1000000000,9999999999);
+			$user->email_verified = true;
+			$user->phone_verified = true;
+			
+			$user->save();
+			$bar->advance();
+		}
+		$bar->finish();
+	}
 }

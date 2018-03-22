@@ -8,22 +8,39 @@
                     <thead>
                     <tr>
                         <th>Name</th>
+                        <th>Bid</th>
                         <th>Date</th>
-                        <th>Amount</th>
-                        <th>Status</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="user in applicants.data">
-                        <td>{{ user.username }}</td>
-                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> {{ user.bid_date }}</span> </td>
-                        <td>{{ user.bid | currency }}</td>
                         <td>
-                            <div class="label label-table label-success">Applied</div>
+                            <a href="javascript:void(0)" @click="viewProfile(user)">
+                                {{ user.username }}
+                            </a>
+                        </td>
+                        <td>{{ job.offer | currency }}</td>
+                        <td><span class="text-muted"><i class="fa fa-clock-o"></i> {{ user.bid_date }}</span> </td>
+                        <td>
+                            <a v-if="!user.hired" href="javascript:void(0)"
+                               class="label label-table label-success"
+                                @click.prevent="hire(user)">
+                                Hire <i class="icon handshake"></i>
+                            </a>
+
+                            <a v-else class="ui tag green label">Hired!</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+
+        <div class="ui modal large profile" style="bottom: unset;">
+            <div class="header">Employee' Profile</div>
+            <div class="content">
+
             </div>
         </div>
     </div>
@@ -63,7 +80,24 @@
                             this.applicants.loading = false;
                         })
                 ;
-            }
+            },
+            hire(user){
+                this.applicants.loading = true;
+                user.hired = true;
+                window.axios.post(`/api/jobs/${this.job.id}/hire`, {
+                    user_id : user.id,
+                    wages : this.job.offer
+                })
+                        .then((response) => {
+                            this.applicants.loading = false;
+                        })
+                ;
+            },
+            viewProfile : function (user) {
+                $('.ui.modal.profile')
+                        .modal('show')
+                ;
+            },
         },
         mounted(){
             this.getApplicants();

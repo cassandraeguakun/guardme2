@@ -47,10 +47,10 @@ class JobResource extends Resource
                 'line3' => $this->metadata['address']['line3'] ?? null,
                 'city' => $this->metadata['address']['city'] ?? null,
                 'county' => $this->metadata['address']['county'] ?? null,
-                'coord' => [
-                    'latitude' => $this->metadata['address']['coord']['latitude'] ?? 52.24593734741211,
-                    'longitude' => $this->metadata['address']['coord']['longitude'] ?? -0.891636312007904
-                ],
+            ],
+            'location' => [
+                'latitude' => $this->metadata['location']['latitude'] ?? 0,
+                'longitude' => $this->metadata['location']['longitude'] ?? 0
             ],
             'postcode' => $this->postcode,
             'date' => [
@@ -58,7 +58,7 @@ class JobResource extends Resource
                 'end' => $this->ends
             ],
             'rating' => $this->rating,
-            'wages' => $this->wages,
+            'offer' => $this->offer,
             'publishedOn' => [
                 'date' => $this->created_at->format('Y-m-d H:i:s a'),
                 'diff' => $this->created_at->diffForHumans()
@@ -66,7 +66,11 @@ class JobResource extends Resource
             'company' => new CompanyResource($this->company),
             'categories' => CategoryResource::collection($this->categories),
             'applied' => $applied, //$this->when(self::$request_user_id, $applied)
-            'total_applicants' => $this->applicants()->count()
+            'total_applicants' => $this->applicants()->count(),
+            'total_employees' => $this->employees()->count(),
+            'completed' => $this->completed,
+            'total_required_employees' => $this->number_of_employees_needed,
+            'total_work_hours_per_employee' => $this->total_work_hours,
         ];
     }
 
