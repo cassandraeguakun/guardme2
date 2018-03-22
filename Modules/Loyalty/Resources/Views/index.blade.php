@@ -42,7 +42,7 @@
                     <td>{{ $loyalty->username }}</td>
                     <td>{{ implode(",", array_column($loyalty->roles->toArray(), "name")) }}</td>
                     <td align="center">{{ $loyalty->registered_date->format('Y-m-d') }}</td>
-                    <td align="center">{{ optional($loyalty->firstJobsApplications->first())->bid_at }}</td>
+                    <td align="center">{{ optional($loyalty->firstJobsApplications->first())->hired_at }}</td>
                     <td align="center">{{ $loyalty->loyalties->sum('credit') }}</td>
                 </tr>
             @endforeach
