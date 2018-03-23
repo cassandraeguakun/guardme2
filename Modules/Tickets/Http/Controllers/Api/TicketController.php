@@ -54,7 +54,8 @@ class TicketController extends Controller
 
     public function show($id)
     {
-        if ($this->checkRole([config('guardme.acl.Job_Seeker'), config('guardme.acl.Employer')]) && $this->validationShow($id)) {
+        if ($this->checkRole([config('guardme.acl.Job_Seeker'), config('guardme.acl.Employer')])
+            && $this->validationShow($id)) {
             abort(404);
         }
 
@@ -68,7 +69,7 @@ class TicketController extends Controller
 
     public function update(Request $request, $id)
     {
-        $errors = $this->updateTicket($request, $id);
+        $errors = $this->updateTicket($request, auth()->guard('api')->user()->id);
 
         return response()->json([
             'status' => $errors ? 500 : 200,
