@@ -43,18 +43,9 @@
                     {{--<li><a href="/account/feedback"><i class="fa fa-reply"></i> Feedback</a></li>--}}
                     <li><a href="/account/profile/delete"><i class="fa fa-remove"></i> Delete Account</a></li>
                     @if(hasRole(config('guardme.acl.Admin')))
-                    <li>
-                        <a href="/account/profile/users">
-                            <i class="fa fa-users"></i>
-                            <span class="hide-menu"> Manage Users <span class="fa arrow"></span></span>
-                        </a>
-
-                        <ul class="nav nav-third-level">
-                            <li><a href="/account/profile/users"> All Users</a></li>
-                            <li><a href="/account/profile/users/suspended"> Suspended Accounts</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/account/profile/users"><i class="fa fa-users"></i> Security personnel</a></li>
                     <li><a href="/account/profile/users/employers"><i class="fa fa-users"></i> Employers</a></li>
+                    <li><a href="/account/profile/users/suspended"><i class="fa fa-users"></i> Suspended Accounts</a></li>
                     @endif
                 </ul>
             </li>
