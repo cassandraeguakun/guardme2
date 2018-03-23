@@ -44,6 +44,7 @@
                        v-model="registration.company" class="form-control" />
             </div>
 
+            <input hidden type="text" id="referral_code" name="referral_code" v-model="registration.referral_code" class="form-control" />
             <div class="col_full nobottommargin">
                 <button class="button button-rounded t400 nomargin" id="reg-form-submit"
                         type="submit">Register</button>
@@ -73,6 +74,7 @@
                     password : '',
                     retype_password : '',
                     company : '',
+                    referral_code : this.$root.getUrlVars()['ref'],
                     isEmployer : false
                 },
                 message : 'Working. Please wait...'

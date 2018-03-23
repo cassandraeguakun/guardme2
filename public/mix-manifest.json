@@ -20,6 +20,9 @@
     "/build/js/backend/profile/phone.min.js": "/build/js/backend/profile/phone.min.js",
     "/build/js/backend/profile/email.min.js": "/build/js/backend/profile/email.min.js",
     "/build/js/backend/profile/delete-request.min.js": "/build/js/backend/profile/delete-request.min.js",
+    "/build/js/backend/loyalty/redeem-credit.min.js": "/build/js/backend/loyalty/redeem-credit.min.js",
+    "/build/js/backend/loyalty/loyalty.min.js": "/build/js/backend/loyalty/loyalty.min.js",
+    "/build/js/backend/loyalty/credit-history.min.js": "/build/js/backend/loyalty/credit-history.min.js",
     "/build/css/site.vendors.bundle.min.css": "/build/css/site.vendors.bundle.min.css",
     "/build/js/app.vendors.bundle.js": "/build/js/app.vendors.bundle.js",
     "/build/js/site.vendors.bundle.min.js": "/build/js/site.vendors.bundle.min.js"

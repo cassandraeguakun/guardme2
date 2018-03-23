@@ -1,4 +1,4 @@
-@extends("app::layouts.pages")
+@extends("app::layouts.app")
 
 @section("page_title")
     <h1 class="uk-text-center logo-heading">

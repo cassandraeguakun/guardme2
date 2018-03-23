@@ -63,4 +63,7 @@ mix
     .js('Vue/pages/profile/phone.js', 'public/build/js/backend/profile/phone.min.js')
     .js('Vue/pages/profile/email.js', 'public/build/js/backend/profile/email.min.js')
     .js('Vue/pages/users/index.js', 'public/build/js/backend/users/index.min.js')
+    .js('Vue/pages/loyalty/loyalty.js', 'public/build/js/backend/loyalty/loyalty.min.js')
+    .js('Vue/pages/loyalty/credit-history.js', 'public/build/js/backend/loyalty/credit-history.min.js')
+    .js('Vue/pages/loyalty/redeem-credit.js', 'public/build/js/backend/loyalty/redeem-credit.min.js')
 ;
