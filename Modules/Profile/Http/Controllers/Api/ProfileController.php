@@ -74,6 +74,9 @@ class ProfileController extends Controller
             $filter = request()->get('filter');
 
             switch ($filter) {
+                case 'all':
+                    $filters = array_merge($filters, []);
+                break;
                 case 'new':
                     $filters = array_merge($filters, [
                         'between' => request()->only(['date_from', 'date_to'])
