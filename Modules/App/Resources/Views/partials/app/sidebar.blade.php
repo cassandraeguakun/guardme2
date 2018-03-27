@@ -42,13 +42,14 @@
                     <li><a href="/account/profile/verification"><i class="fa fa-check"></i> Verification</a></li>
                     {{--<li><a href="/account/feedback"><i class="fa fa-reply"></i> Feedback</a></li>--}}
                     <li><a href="/account/profile/delete"><i class="fa fa-remove"></i> Delete Account</a></li>
-                    @if(hasRole(config('guardme.acl.Admin')))
-                    <li><a href="/account/profile/users"><i class="fa fa-users"></i> Security personnel</a></li>
-                    <li><a href="/account/profile/users/employers"><i class="fa fa-users"></i> Employers</a></li>
-                    <li><a href="/account/profile/users/suspended"><i class="fa fa-users"></i> Suspended Accounts</a></li>
-                    @endif
                 </ul>
             </li>
+
+            @if(hasRole(config('guardme.acl.Admin')))
+            <li><a href="/account/profile/users"><i class="fa fa-users"></i> Security personnel</a></li>
+            <li><a href="/account/profile/users/employers"><i class="fa fa-users"></i> Employers</a></li>
+            <li><a href="/account/profile/users/suspended"><i class="fa fa-users"></i> Suspended Accounts</a></li>
+            @endif
 
             <li >
                 <a href="/account/wallet" class="{{ isPath('account/wallet') ? 'active' : '' }}">
