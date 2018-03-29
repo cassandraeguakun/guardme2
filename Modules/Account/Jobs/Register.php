@@ -48,7 +48,8 @@ class Register
             'api_token' => str_random(60),
             'fb_id' => $this->data['fb_id'] ?? null,
             'twit_id' => $this->data['twit_id'] ?? null,
-            'referrer_id' => $this->data['referrer_id'] ?? null
+            'referrer_id' => $this->data['referrer_id'] ?? null,
+            'referral_code' => $this->generateRandom4()
         ]);
 
         $user->save();
@@ -62,5 +63,19 @@ class Register
     {
         return explode('@',$email)[0];
 
+    }
+
+    private function generateRandom4()
+    {
+        $number = "";
+        for ($i = 0; $i < 4; $i++) {
+            $min = ($i == 0) ? 1 : 0;
+            $number .= mt_rand($min, 9);
+        }
+
+        $count = User::where('referral_code', $number)->get()->count();
+        if($count > 0) $this->generateRandom4();
+
+        return $number;
     }
 }

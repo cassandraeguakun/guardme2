@@ -4,7 +4,6 @@ namespace Modules\Loyalty\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Modules\Loyalty\Models\Referral;
 use Modules\Loyalty\Repositories\LoyaltyRepository;
 
 class LoyaltyController extends Controller
@@ -21,7 +20,7 @@ class LoyaltyController extends Controller
     public function index()
     {
         $filter = request('filter');
-
+        $referral_code = auth()->user()->referral_code;
         if($filter === 'expired'):
             $expired_lists = $this->loyalty->getExpiredList();
             $expired_lists->withPath("loyalty?filter=$filter");
@@ -30,17 +29,19 @@ class LoyaltyController extends Controller
             $loyalties->withPath("loyalty?filter=$filter");
         endif;
 
-        return view($this->moduleName . '::index', compact('loyalties', 'expired_lists'));
+        return view($this->moduleName . '::index', compact('loyalties', 'expired_lists', 'referral_code'));
     }
 
     public function insertReferralCode()
     {
         $code = $this->loyalty->referralCodeCheck(request('code'));
 
-        Referral::create([
+        // todo fix it as per revision
+
+/*        Referral::create([
             'user_id' => auth()->user()->id,
             'code' => $code
-        ]);
+        ]);*/
 
         return response()->json(['status' => 1, 'message' => 'Successfully inserted Referral Code', 'code' => $code]);
     }

@@ -8,6 +8,7 @@
         "php": ">=7.0.0",
         "caffeinated/modules": "^4.2",
         "cloudinary/cloudinary_php": "^1.8",
+        "doctrine/dbal": "^2.6",
         "fedeisas/laravel-mail-css-inliner": "^2.2",
         "fideloper/proxy": "~3.3",
         "guzzlehttp/guzzle": "^6.3",
