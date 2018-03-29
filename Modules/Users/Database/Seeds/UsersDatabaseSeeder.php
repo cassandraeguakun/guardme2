@@ -25,7 +25,8 @@ class UsersDatabaseSeeder extends Seeder
                 'username' => 'admin',
                 'email' => 'admin@example.com',
                 'api_token' => str_random(60),
-                'remember_token' => str_random(10)
+                'remember_token' => str_random(10),
+                'referral_code' => str_random(4),
             ],
             [
                 'password' => bcrypt('12345'),
@@ -34,6 +35,7 @@ class UsersDatabaseSeeder extends Seeder
                 'email' => 'super_admin@example.com',
                 'api_token' => str_random(60),
                 'remember_token' => str_random(10),
+                'referral_code' => str_random(4),
             ],
             [
                 'password' => bcrypt('12345'),
@@ -42,6 +44,7 @@ class UsersDatabaseSeeder extends Seeder
                 'email' => 'employer@example.com',
                 'api_token' => str_random(60),
                 'remember_token' => str_random(10),
+                'referral_code' => str_random(4),
             ],
             [
                 'password' => bcrypt('12345'),
@@ -50,6 +53,7 @@ class UsersDatabaseSeeder extends Seeder
                 'email' => 'job_seeker@example.com',
                 'api_token' => str_random(60),
                 'remember_token' => str_random(10),
+                'referral_code' => str_random(4),
             ],
             [
                 'password' => bcrypt('12345'),
@@ -58,6 +62,7 @@ class UsersDatabaseSeeder extends Seeder
                 'email' => 'license_partner@example.com',
                 'api_token' => str_random(60),
                 'remember_token' => str_random(10),
+                'referral_code' => str_random(4),
             ]
         ];
 
