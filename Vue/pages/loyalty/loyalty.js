@@ -3,7 +3,7 @@ new window.App({
   data : function(){
     return {
       url: null,
-      copyText: 'copy',
+      copyText: 'Copy',
       copyBtn: false
     }
   },
@@ -26,7 +26,7 @@ new window.App({
             }
           })
     },
-    copyUrl(text){
+    copyUrl(){
       let textArea = document.createElement("textarea");
       textArea.style.position = 'fixed';
       textArea.style.top = 0;
@@ -38,7 +38,7 @@ new window.App({
       textArea.style.outline = 'none';
       textArea.style.boxShadow = 'none';
       textArea.style.background = 'transparent';
-      textArea.value = text + this.url;
+      textArea.value = $("#linkUrl").val();
       document.body.appendChild(textArea);
       textArea.select();
 

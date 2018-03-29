@@ -5,15 +5,15 @@
     <div class="col-md-8" style="margin-bottom: 10px;">
         <form class="form-inline">
             <div class="form-group">
-                <input readonly v-model="url" type="text" class="form-control" name="url" id="url" placeholder="Referral Code">
-                <button type="button" data-toggle="modal" @click="saveUrlButton" class="btn btn-primary">Save</button>
+                <input id="linkUrl" readonly type="text" class="form-control" placeholder="Referral Code" value="{{ config('app.url') }}?ref={{ $referral_code }}">
+                <button type="button" data-toggle="modal" @click="copyUrl()" class="btn btn-primary">@{{ copyText }}</button>
             </div>
         </form>
-        <div style="margin-top: 10px;">
+{{--        <div style="margin-top: 10px;">
             <b>Link : </b>
             <span id="linkUrl">{{ config('app.url') }}?ref=@{{ url }}</span>
             <button v-show="copyBtn" class="btn btn-sm btn-info" @click="copyUrl('{{ config('app.url') }}?ref=')">@{{ copyText }}</button>
-        </div>
+        </div>--}}
     </div>
     <div class="col-md-4">
         <div style="margin-bottom: 10px;" class="pull-right">
@@ -21,7 +21,7 @@
                 <option value="{{ route('loyalty.index') }}">Select</option>
                 <option {{ request('filter') == 'newest' ? 'selected' : '' }} value="{{ route('loyalty.index', ['filter' => 'newest']) }}">Newest</option>
                 <option {{ request('filter') == 'oldest' ? 'selected' : '' }} value="{{ route('loyalty.index', ['filter' => 'oldest']) }}">Oldest</option>
-                <option {{ request('filter') == 'expired' ? 'selected' : '' }} value="{{ route('loyalty.index', ['filter' => 'expired']) }}">Expired Invitation</option>
+                {{--<option {{ request('filter') == 'expired' ? 'selected' : '' }} value="{{ route('loyalty.index', ['filter' => 'expired']) }}">Expired Invitation</option>--}}
             </select>
         </div>
     </div>

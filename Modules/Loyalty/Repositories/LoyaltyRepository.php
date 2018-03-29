@@ -9,7 +9,6 @@
 namespace Modules\Loyalty\Repositories;
 
 use Illuminate\Http\Request;
-use Modules\Loyalty\Models\Referral;
 use Modules\Loyalty\Models\ReferralCredit;
 use Modules\Users\Models\User;
 
@@ -24,7 +23,7 @@ class LoyaltyRepository
     public function all($filter = '')
     {
         $user_id = $this->getUserId();
-        $user = User::with(['loyalties'])->where('referrer_id', $user_id);
+        $user = User::where('referrer_id', $user_id);
 
         if($filter == 'newest'){
             $user->orderBy('registered_date', 'desc');
@@ -39,9 +38,9 @@ class LoyaltyRepository
     {
         $user_id = $this->getUserId();
         $days_ago = date("Y-m-d", strtotime("-30 day"));
-        return Referral::where('user_id', $user_id)
+/*        return Referral::where('user_id', $user_id)
                          ->where('updated_at', '<', $days_ago)
-                         ->paginate(static::COUNT_IN_ONE_PAGE);
+                         ->paginate(static::COUNT_IN_ONE_PAGE);*/
     }
 
     public function getRedeemCredit($is_redeemed = 0, $filter = null)
@@ -88,7 +87,7 @@ class LoyaltyRepository
 
     public function referralCodeCheck($code)
     {
-        $count = Referral::where('code', $code)->get()->count();
+        $count = User::where('referral_code', $code)->get()->count();
         if($count > 0) {
             return $this->generateRandom4();
         }
@@ -103,7 +102,7 @@ class LoyaltyRepository
             $number .= mt_rand($min, 9);
         }
 
-        $count = Referral::where('code', $number)->get()->count();
+        $count = User::where('referral_code', $number)->get()->count();
         if($count > 0) $this->generateRandom4();
 
         return $number;
