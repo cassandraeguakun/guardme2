@@ -361,3 +361,8 @@ window.App = Vue.extend({
 });
 
 Vue.component('gm-response-messenger', require('../blocks/shared/ResponseMessage.vue'));
+window.accounting = require('../../Scripts/accounting/accounting.min');
+
+Vue.filter('currency', function (value:any) {
+    return window.accounting.formatMoney(value,'£ ');
+});

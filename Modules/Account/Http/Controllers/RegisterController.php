@@ -39,6 +39,8 @@ class RegisterController extends Controller
 
         if($company) $data['company'] = $company;
 
+        $data['referrer_id'] = optional(User::where('referral_code', request()->get('referral_code'))->first())->id;
+
         publish(new Register($data));
 
         if(\request()->ajax()){

@@ -123,6 +123,31 @@
             </li>
 
             <li>
+                <a href="/loyalty" class="{{ isPath('account/loyaltly_program') ? 'active' : '' }}">
+                    <i class="fa fa-cog"></i>
+                    <span class="hide-menu"> Loyaltly Program <span class="fa arrow"></span></span>
+                </a>
+
+                <ul class="nav nav-second-level">
+                    <li class="{{ isPath('loyalty') ? 'active' : '' }} ">
+                        <a href="/loyalty" class="">
+                            <i class="fa fa-lock"></i> <span> New Referrals</span>
+                        </a>
+                    </li>
+                    <li class="{{ isPath('loyalty/credit-history') ? 'active' : '' }} ">
+                        <a href="/loyalty/credit-history" class="">
+                            <i class="fa fa-lock"></i> <span> Credit History</span>
+                        </a>
+                    </li>
+                    <li class="{{ isPath('loyalty/redeem-credit') ? 'active' : '' }} ">
+                        <a href="/loyalty/redeem-credit" class="">
+                            <i class="fa fa-lock"></i> <span> Redeem Credit</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
                 <a href="javascript:void(0);" data-toggle="modal" data-target="#invite-friends-modal">
                     <i class="fa fa-share-alt"></i>
                     <span class="hide-menu"> Invite Users</span>

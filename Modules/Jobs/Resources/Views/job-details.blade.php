@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="content-wrap">
-        <div class="container clearfix">
+        <div class="container clearfix" v-if="job">
             <div class="col_three_fifth nobottommargin listings">
                 <div class="listing-item">
                     <div class="fancy-title ">
@@ -22,7 +22,7 @@
 
                     <div class="mb-3">
                         <a class="ui blue image label tiny">
-                            £@{{ job.wages }}
+                            @{{ job.offer | currency }}
                             <div class="detail">Hourly</div>
                         </a>
                     </div>
@@ -38,8 +38,8 @@
             <div class="col_two_fifth nobottommargin col_last px-5">
                 <google-map :name="job.id"
                             :height="450"
-                            :markers="[{latitude: job.address.coord.latitude,
-                                        longitude: job.address.coord.longitude}]">
+                            :markers="[{latitude: job.location.latitude,
+                                        longitude: job.location.longitude}]">
                 </google-map>
             </div>
         </div>

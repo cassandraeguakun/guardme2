@@ -30,8 +30,8 @@
                         <div class="h-100 user-img" style="width: 180px !important;">
                             <google-map :name="job.id"
                                         :height="130"
-                                        :markers="[{latitude: job.address.coord.latitude,
-                                        longitude: job.address.coord.longitude}]">
+                                        :markers="[{latitude: job.location.latitude,
+                                        longitude: job.location.longitude}]">
                             </google-map>
                         </div>
                         <div class="mail-contnet">
