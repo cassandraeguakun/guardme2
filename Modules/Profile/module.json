@@ -1,6 +1,0 @@
-{
-    "name": "Profile",
-    "slug": "profile",
-    "version": "1.0",
-    "description": "Profile module handles all the users profile related functionality"
-}
