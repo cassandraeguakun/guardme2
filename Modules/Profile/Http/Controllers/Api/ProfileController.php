@@ -68,12 +68,15 @@ class ProfileController extends Controller
             ]);
         }
 
-        $filters = $type == null ? ['notSuspended'] : [$type];
+        $filters = $type == null ? ['notSuspended', 'security'] : [$type];
 
         if (request()->isMethod('post')) {
             $filter = request()->get('filter');
 
             switch ($filter) {
+                case 'all':
+                    $filters = array_merge($filters, []);
+                break;
                 case 'new':
                     $filters = array_merge($filters, [
                         'between' => request()->only(['date_from', 'date_to'])

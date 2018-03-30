@@ -58,7 +58,7 @@ class LoginController extends Controller
                     'errors' => [
                         $validator->errors()->getMessages(),
                     ],
-                    'message' => 'Failed login validation. You must have omitted a required field.'
+                    'message' => $this->suspended ? 'Your account has been suspended. Please contact the support.' : 'Invalid username and/or password'
                 ],401);
             }
 
