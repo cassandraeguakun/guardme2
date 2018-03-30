@@ -9,7 +9,6 @@
                         About The Job
                     </h2>
 
-
                     <div class="col_full">
                         <label for="job_title">Job Title:</label>
                         <input type="text" id="job_title" name="title"
@@ -47,34 +46,38 @@
                                     <label>Job location:</label>
 
                                     <div class=" fluid">
-                                        <input type="text" name="postcode" v-model.lazy="job.postcode"
+                                        <input type="text" name="postcode" v-model="job.postcode"
                                                placeholder="Your postcode:">
                                         <span v-show="errors.has('new-job-form.postcode')"
                                               class="d-inline-block uk-text-small uk-text-danger">
-                                        {{ errors.first('new-job-form.postcode') }}
-                                     </span>
+                                            {{ errors.first('new-job-form.postcode') }}
+                                         </span>
                                     </div>
 
                                     <div class=" fluid">
-                                        <input type="text" name="houseNumber" v-model="job.address.houseNumber"
+                                        <input type="text" name="houseNumber" v-model="job.houseNumber"
                                                placeholder="House number:">
                                         <span v-show="errors.has('new-job-form.houseNumber')"
                                               class="d-inline-block uk-text-small uk-text-danger">
                                             {{ errors.first('new-job-form.houseNumber') }}
                                         </span>
                                     </div>
-
+                                    
                                 </div>
                             </div>
 
                             <div class="col-7">
-                                <div class="field">
-                                    <label>Google map:</label>
+                                <label class="t400" v-if="fetched_addresses.fetching">Fetching address....</label>
+                                <label class="t400" v-if="fetched_addresses.data.length">Select an address</label>
+                                <div class="address-list">
                                     <div class="fluid">
-                                        <google-map name="job_address" :height="210"
-                                                    :loading="job.loadingAddress"
-                                                    :markers="[{latitude: job.address.coord.latitude, longitude: job.address.coord.longitude}]">
-                                        </google-map>
+                                        <div v-for="(address, index) in fetched_addresses.data">
+                                            <input :id="index" class="radio-style" name="radio-group-3"
+                                                   type="radio" @click="selectWorkAddress(address)">
+                                            <label :for="index" class="radio-style-1-label">
+                                                {{ address.line1 }} ({{ address.city }})
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +121,7 @@
                 </form>
             </div>
         </div>
-        <!--<div class="ui modal small new-company" style="bottom: unset;">
+        <div class="ui modal small new-company" style="bottom: unset;">
             <div class="header">Add New Company / Organization</div>
             <div class="content">
                 <form @submit.prevent="validateNewCompanyForm('new-company-form')"
@@ -203,11 +206,14 @@
                     </div>
                 </form>
             </div>
-        </div>-->
+        </div>
     </div>
 </template>
 <style scoped>
-
+    div.address-list{
+        height: 200px;
+        overflow-y: auto;
+    }
 </style>
 <script type="text/babel">
 
@@ -247,20 +253,7 @@
                 job : {
                     title: '',
                     description : '',
-                    address : {
-                        line1 : '',
-                        line2 : '',
-                        line3 : '',
-                        line4 : '',
-                        locality : '',
-                        city : '',
-                        county : '',
-                        coord : {
-                            latt : '',
-                            long : ''
-                        },
-                        houseNumber : '',
-                    },
+                    address : null,
                     county : 0,
                     city : 0,
                     postcode : '',
@@ -268,13 +261,14 @@
                         start : '',
                         end : ''
                     },
-                    wages : 0,
+                    offer : 0,
                     rating : 0,
                     company : null,
                     categories : [],
                     sectors : [],
                     broadcastsConfig : [],
-                    loadingAddress : false
+                    latitude : '',
+                    longitude : '',
                 },
                 categories : {
                     data : [],
@@ -284,10 +278,18 @@
                     data : [],
                     loading : false
                 },
+                fetched_addresses : {
+                    data : [],
+                    fetching : false
+                }
             }
         },
         methods : {
             continue(){
+                if(!this.job.address) {
+                    alert('You need to select an address in order to continue');
+                    return;
+                }
                 this.$emit('submitted', this.job)
             },
             validateForm: function(scope) {
@@ -316,8 +318,6 @@
                 var vm = this;
 
                 vm.company.saving = true;
-
-
 
                 window.axios.post('/api/companies/new', vm.company.data)
                         .then(
@@ -381,50 +381,56 @@
                             vm.companies.loading = false;
                         });
             },
-            getAddress: _.debounce(function(postcode, houseNumber){
-                const vm = this;
-
-                if(postcode && houseNumber){
-                    var url = 'https://api.getAddress.io/find/'
-                            + postcode + '/'
-                            + houseNumber
-                            + '?api-key='
-                            + process.env.MIX_GET_ADDRESS_KEY;
-
-                    vm.job.loadingAddress = true;
-
-                    vm.$root.customUrlRequest(url, 'get').then(
-                            function (response) {
-                                const addresses = response.addresses[0].split(',');
-
-                                vm.job.address.line1 = addresses[0].trim();
-                                vm.job.address.line2 = addresses[1].trim();
-                                vm.job.address.line3 = addresses[2].trim();
-                                vm.job.address.line4 = addresses[3].trim();
-                                vm.job.address.locality = addresses[4].trim();
-                                vm.job.address.city = addresses[5].trim();
-                                vm.job.address.county = addresses[6].trim();
-                                vm.job.address.coord.latitude = response.latitude;
-                                vm.job.address.coord.longitude = response.longitude;
-
-                                vm.job.loadingAddress = false;
-                            }
-                    ).catch(function (e) {
-                        vm.job.address.line1 = '';
-                        vm.job.address.line2 = '';
-                        vm.job.address.line3 = '';
-                        vm.job.address.line4 = '';
-                        vm.job.address.locality = '';
-                        vm.job.address.city = '';
-                        vm.job.address.county = '';
-                        vm.job.address.coord.latt = '';
-                        vm.job.address.coord.long = '';
-                    });
+            getAddress: _.debounce(function(postcode, houseNumber, company = false){
+                if(company){
+                    this.getCompanyAddress(postcode, houseNumber)
                 } else {
-                    console.log('INVALID', postcode, houseNumber);
+                    this.getWorkAddress(postcode, houseNumber);
                 }
             }, 1500),
-            getCompanyAddress: _.debounce(function (postcode, houseNumber) {
+            getWorkAddress(postcode, houseNumber){
+                if(!postcode) return;
+
+                this.fetched_addresses.fetching = true;
+                var url = 'https://api.getAddress.io/find/'
+                        + postcode + '/';
+
+                if(houseNumber) url += houseNumber;
+
+                url += '?api-key='
+                        + process.env.MIX_GET_ADDRESS_KEY;
+
+                this.$root.customUrlRequest(url, 'get').then(
+                        (response) => {
+                        this.fetched_addresses.data = [];
+
+                        this.job.longitude = response.longitude;
+                        this.job.latitude = response.latitude;
+
+                            response.addresses.forEach((address) => {
+                                var interpreted_address = this.interpretAddress(address);
+
+                                this.fetched_addresses.data.push(interpreted_address);
+                            });
+
+                            this.fetched_addresses.fetching = false;
+
+                        }
+                ).catch((e) => {
+                    /*vm.job.address.line1 = '';
+                    vm.job.address.line2 = '';
+                    vm.job.address.line3 = '';
+                    vm.job.address.line4 = '';
+                    vm.job.address.locality = '';
+                    vm.job.address.city = '';
+                    vm.job.address.county = '';
+                    vm.job.address.coord.latt = '';
+                    vm.job.address.coord.long = '';*/
+                    this.fetched_addresses.fetching = false;
+
+                });
+            },
+            getCompanyAddress: function (postcode, houseNumber) {
                 const vm = this;
 
                 if(postcode && houseNumber){
@@ -460,7 +466,7 @@
                     console.log('INVALID', postcode, houseNumber);
                 }
 
-            }, 1500),
+            },
             loadCategories : function () {
                 var vm = this;
                 vm.categories.loading = true;
@@ -501,7 +507,6 @@
                             vm.sectors.loading = false;
                         });
             },
-
             resetCompanyAddress : function () {
                 const vm = this;
 
@@ -514,12 +519,32 @@
                 vm.company.data.address.county = '';
                 vm.company.data.address.coord.latitude = '';
                 vm.company.data.address.coord.longitude = '';
+            },
+            interpretAddress(address){
+                var decoded_address = {};
+                address = address.split(',');
+
+                decoded_address.line1 = address[0].trim();
+                decoded_address.line2 = address[1].trim();
+                decoded_address.line3 = address[2].trim();
+                decoded_address.line4 = address[3].trim();
+                decoded_address.locality = address[4].trim();
+                decoded_address.city = address[5].trim();
+                decoded_address.county = address[6].trim();
+
+                return decoded_address;
+            },
+            selectWorkAddress(address){
+                this.job.address = address;
             }
         },
         mounted(){
             this.loadCompanies();
             this.loadCategories();
             this.loadSectors();
+        },
+        updated() {
+            $(this.$el).find('.selectpicker').selectpicker('refresh');
         },
         watch : {
             'job.company' : function(newValue, oldValue){
@@ -531,16 +556,16 @@
                 }
             },
             'job.postcode' : function (newPostcode, oldPostCode) {
-                this.getAddress(newPostcode, this.job.address.houseNumber);
+                this.getAddress(newPostcode, this.job.houseNumber);
             },
-            'job.address.houseNumber' : function (newHouseNumber, oldHouseNumber) {
+            'job.houseNumber' : function (newHouseNumber, oldHouseNumber) {
                 this.getAddress(this.job.postcode, newHouseNumber);
             },
             'company.data.postcode' : function (newPostcode, oldPostCode) {
-                this.getCompanyAddress(newPostcode, this.company.data.houseNumber)
+                this.getAddress(newPostcode, this.company.data.houseNumber, true);
             },
             'company.data.houseNumber' : function (newHouseNumber, oldHouseNumber) {
-                this.getCompanyAddress(this.company.data.postcode, newHouseNumber);
+                this.getAddress(this.company.data.postcode, newHouseNumber, true);
             }
         }
     }

@@ -58,7 +58,7 @@
                                 <label>Offer (£):</label>
 
                                 <div class="ui input fluid">
-                                    <input type="text" name="wage" placeholder="£ 8.00" v-model="job.wages">
+                                    <input type="text" name="offer" placeholder="£ 8.00" v-model="job.offer">
                                 </div>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                         start : '',
                         end : ''
                     },
-                    wages : 0,
+                    offer : 0,
                     rating : 0,
                     broadcastsConfig : [],
                     loadingAddress : false
