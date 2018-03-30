@@ -46,18 +46,9 @@
             </li>
 
             @if(hasRole(config('guardme.acl.Admin')))
-            <li>
-                <a href="/account/profile" class="{{ isPath('account/profile/users') ? 'active' : '' }} waves-effect">
-                    <i class="fa fa-user"></i>
-                    <span class="hide-menu"> Manage Users <span class="fa arrow"></span></span>
-                </a>
-
-                <ul class="nav nav-second-level">
-                    <li><a href="/account/profile/users"><i class="fa fa-users"></i> Security personnel</a></li>
-                    <li><a href="/account/profile/users/employers"><i class="fa fa-users"></i> Employers</a></li>
-                    <li><a href="/account/profile/users/suspended"><i class="fa fa-users"></i> Suspended Accounts</a></li>
-                </ul>
-            </li>
+            <li><a href="/account/profile/users"><i class="fa fa-users"></i> Security personnel</a></li>
+            <li><a href="/account/profile/users/employers"><i class="fa fa-users"></i> Employers</a></li>
+            <li><a href="/account/profile/users/suspended"><i class="fa fa-users"></i> Suspended Accounts</a></li>
             @endif
 
             <li >
