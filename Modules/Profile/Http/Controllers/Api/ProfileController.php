@@ -68,7 +68,7 @@ class ProfileController extends Controller
             ]);
         }
 
-        $filters = $type == null ? ['notSuspended', 'security'] : [$type];
+        $filters = $type == null ? ['notSuspended'] : [$type];
 
         if (request()->isMethod('post')) {
             $filter = request()->get('filter');

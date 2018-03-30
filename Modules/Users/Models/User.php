@@ -206,13 +206,6 @@ class User extends \Illuminate\Foundation\Auth\User
         });
     }
 
-    public function scopeSecurity($query)
-    {
-        return $query->whereHas('roles', function ($query) {
-            return $query->where('name', 'Job Seeker');
-        });
-    }
-
     public function scopeBetween($query, $dates)
     {
         return $query->whereBetween('registered_date', $dates);

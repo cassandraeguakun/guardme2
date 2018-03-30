@@ -236,8 +236,11 @@ new window.App({
 
         printStatus(status) {
             switch (status) {
-                case 1:
+                case 0:
                     return '<a class="label label-rouded label-default">Unverified</a>';
+                    break;
+                case 1:
+                    return '<a class="label label-rouded label-info">Verified</a>';
                     break;
                 case 2:
                     return '<a class="label label-rouded label-warning">Suspended</a>';
