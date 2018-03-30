@@ -30,5 +30,12 @@ return [
     'broadcasts' => [
         'everyone' => 'Everyone',
         'favourites' => 'Favourites'
-    ]
+    ],
+	'ratings' => [
+        'skills' => 'Skills',
+        'quality_of_work' => 'Quality of Work',
+        'availability' => 'Availability',
+        'communication' => 'Communication',
+        'adherence_to_schedule' => 'Adherence to schedule',
+    ],
 ];

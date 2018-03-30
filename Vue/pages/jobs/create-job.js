@@ -17,6 +17,7 @@ new window.App({
     components : {
         'gm-about-new-job' : require('../../blocks/jobs/create/AboutJob.vue'),
         'gm-job-work-details' : require('../../blocks/jobs/create/JobWorkDetails.vue'),
+       // 'gm-job-payment' : require('../../blocks/jobs/create/Payment.vue'),
     },
     watch : {
 

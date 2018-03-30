@@ -27,7 +27,7 @@ class ApplyToJob
      * @param $user_id
      * @param $bidAmount
      */
-    public function __construct(Job $job, $user_id, $bidAmount)
+    public function __construct(Job $job, $user_id, $bidAmount = 0)
     {
         $this->job = $job;
         $this->user_id = $user_id;
@@ -38,11 +38,11 @@ class ApplyToJob
     {
         $this->job->applicants()->attach($this->user_id,
             [
-                'bid' => $this->bidAmount,
-                'bid_at' => date('Y-m-d')
+                //'bid' => $this->bidAmount,
+                'applied_at' => date('Y-m-d')
             ]);
 
-        publish(new JobWasBidded($this->job, $this->user_id, $this->bidAmount));
+        // publish(new JobWasBidded($this->job, $this->user_id, $this->bidAmount));
     }
 
 }

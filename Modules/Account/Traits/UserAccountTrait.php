@@ -11,6 +11,7 @@ namespace Modules\Account\Traits;
 
 use Modules\Account\Models\Permission;
 use Modules\Account\Models\Role;
+use Modules\Jobs\Models\JobEmployeesPivot;
 
 trait UserAccountTrait
 {
@@ -79,5 +80,11 @@ trait UserAccountTrait
             ->count();
 
         return $count ?? false;
+    }
+
+
+    public function firstJobsApplications()
+    {
+        return $this->hasMany(JobEmployeesPivot::class, 'user_id', 'id')->limit(1);
     }
 }

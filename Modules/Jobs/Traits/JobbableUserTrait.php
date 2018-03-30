@@ -22,8 +22,16 @@ trait JobbableUserTrait
 
     public function appliedJobs()
     {
-        return $this->belongsToMany(Job::class,'job_applications_pivot','user_id','job_id')
-            ->withPivot('bid');
+        return $this->belongsToMany(Job::class,'job_applications_pivot',
+            'user_id','job_id')
+            ->withPivot('bid', 'applied_at');
     }
 
+    public function hiredJobs()
+    {
+        return $this->belongsToMany(Job::class,'job_employees_pivot',
+            'user_id','job_id')
+            ->withPivot('wages', 'hired_at')
+            ;
+    }
 }

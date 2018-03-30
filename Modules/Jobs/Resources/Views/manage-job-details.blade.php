@@ -53,6 +53,20 @@
                             </span>
                             </a>
                         </li>
+						 <li role="presentation" class="nav-item">
+                                <a href="#employees" class="nav-link"
+                                   aria-controls="employees" role="tab" data-toggle="tab"
+                                   @click="gotoPage('employees')"
+                                   aria-expanded="true">
+                            <span class="visible-xs">
+                                <i class="icon handshake"></i>
+                            </span>
+                                    <span class="hidden-xs">
+                                Hired Employees
+                                <span v-if="job && job.total_employees">(@{{ job.total_employees }})</span>
+                            </span>
+                                </a>
+                            </li>
                         <li role="presentation" class="nav-item">
                             <a href="#feedback" class="nav-link"
                                aria-controls="feedback" role="tab" data-toggle="tab"
@@ -88,6 +102,11 @@
                             <gm-job-applicants-tab :job="job"> </gm-job-applicants-tab>
                         </div>
                     </div>
+					<div class="tab-pane" id="employees">
+                            <div v-if="page == 'employees'">
+                                <gm-job-employees-tab :job="job"> </gm-job-employees-tab>
+                            </div>
+                        </div>
                     <div class="tab-pane" id="feedback">
                         <div v-if="page == 'feedback'">
                             <h3>Feedback on job</h3>

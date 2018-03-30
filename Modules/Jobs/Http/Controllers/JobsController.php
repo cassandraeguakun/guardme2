@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Modules\Jobs\Events\JobWasMarkedComplete;
 use Modules\Jobs\Http\Resources\ApplicantsResource;
 use Modules\Jobs\Http\Resources\JobResource;
 use Modules\Jobs\Http\Resources\UserJobProfileResource;
@@ -43,7 +44,7 @@ class JobsController extends Controller
 
         $job = $this->jobRepository->saveJob($data);
 
-        return $job;
+        return new JobResource($job);
     }
 
     public function schedule()
@@ -94,12 +95,6 @@ class JobsController extends Controller
         return JobResource::collection($jobs, $user_id);
     }
 
-    public function applyToJob($job_id)
-    {
-        $job = $this->jobRepository->getJobById($job_id);
-
-        publish(new ApplyToJob($job, auth()->user()->id, \request('bid')));
-    }
 
     public function getUserJobProfile($user_id, UsersRepository $usersRepository)
     {
@@ -117,14 +112,29 @@ class JobsController extends Controller
         return view('jobs::manage-job-details', compact('job_token'));
     }
 
-    public function getJobApplicants($job_id)
+    public function markJobAsComplete($job_id)
     {
-        $total_applicants = 0;
+        $job = $this->jobRepository->getJobById($job_id);
 
-        $applicants = $this->jobRepository->getJobApplicants($job_id, 10, $total_applicants);
+        $job->completed = true;
+        $job->completed_at = date('Y-m-d');
 
-        return ApplicantsResource::collection($applicants, [
-            'total' => $total_applicants
-        ]);
+        $job->save();
+
+        publish(new JobWasMarkedComplete($job));
+
+        return $job;
+    }
+
+
+    public function unMarkJobAsComplete($job_id)
+    {
+        $job = $this->jobRepository->getJobById($job_id);
+
+        $job->completed = false;
+
+        $job->save();
+
+        return $job;
     }
 }

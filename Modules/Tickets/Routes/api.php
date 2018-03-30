@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'tickets', 'namespace' => 'Api', 'middleware' => 'auth:api'], function() {
+Route::group(['prefix' => 'account/support/tickets', 'namespace' => 'Api', 'middleware' => 'auth:api'], function() {
     Route::get('/', 'TicketController@index');
 
     Route::post('/', 'TicketController@store');

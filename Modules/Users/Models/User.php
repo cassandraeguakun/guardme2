@@ -9,6 +9,8 @@ use Modules\Account\Traits\UserAccountTrait;
 use Modules\App\Models\City;
 use Modules\Company\Traits\CompanyUserTrait;
 use Modules\Jobs\Traits\JobbableUserTrait;
+use Modules\Loyalty\Traits\LoyaltyUserTrait;
+
 use Modules\Users\Helpers\UsersFilter;
 
 class User extends \Illuminate\Foundation\Auth\User
@@ -16,7 +18,8 @@ class User extends \Illuminate\Foundation\Auth\User
     use Notifiable,
         UserAccountTrait,
         JobbableUserTrait,
-        CompanyUserTrait;
+        CompanyUserTrait,
+        LoyaltyUserTrait;
 
     const STATUS_UNVERIFIED = 1;
     const STATUS_SUSPENDED = 2;

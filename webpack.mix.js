@@ -47,16 +47,23 @@ mix
     .ts('Vue/bootstrap/app.ts', 'public/build/js/app.min.js')
     .js('Vue/pages/auth.js', 'public/build/js/auth.min.js')
     .js('Vue/pages/dashboard/dashboard.js', 'public/build/js/backend/dashboard.min.js')
-    .js('Vue/pages/jobs/create-job.js', 'public/build/js/jobs/create-job.min.js')
+    
+	.js('Vue/pages/jobs/create-job.js', 'public/build/js/jobs/create-job.min.js')
     .js('Vue/pages/jobs/active-schedule.js', 'public/build/js/backend/jobs/active-schedule.min.js')
     .js('Vue/pages/jobs/job-details.js', 'public/build/js/jobs/job-details.min.js')
+    .js('Vue/pages/jobs/job-payment.js', 'public/build/js/jobs/job-payment.min.js')
     .js('Vue/pages/jobs/job-listing.js', 'public/build/js/jobs/job-listings.min.js')
     .js('Vue/pages/jobs/manage-job-schedule.js', 'public/build/js/backend/jobs/manage-job-schedule.min.js')
-    .js('Vue/pages/tickets/tickets.js', 'public/build/js/backend/tickets/tickets.min.js')
+    
+	.js('Vue/pages/tickets/tickets.js', 'public/build/js/backend/tickets/tickets.min.js')
     .js('Vue/pages/profile/profile.js', 'public/build/js/backend/profile/profile.min.js')
-    .js('Vue/pages/profile/delete-request.js', 'public/build/js/backend/profile/delete-request.min.js')
+    
+	.js('Vue/pages/profile/delete-request.js', 'public/build/js/backend/profile/delete-request.min.js')
     .js('Vue/pages/profile/users.js', 'public/build/js/backend/profile/users.min.js')
     .js('Vue/pages/profile/phone.js', 'public/build/js/backend/profile/phone.min.js')
     .js('Vue/pages/profile/email.js', 'public/build/js/backend/profile/email.min.js')
     .js('Vue/pages/users/index.js', 'public/build/js/backend/users/index.min.js')
+    .js('Vue/pages/loyalty/loyalty.js', 'public/build/js/backend/loyalty/loyalty.min.js')
+    .js('Vue/pages/loyalty/credit-history.js', 'public/build/js/backend/loyalty/credit-history.min.js')
+    .js('Vue/pages/loyalty/redeem-credit.js', 'public/build/js/backend/loyalty/redeem-credit.min.js')
 ;
