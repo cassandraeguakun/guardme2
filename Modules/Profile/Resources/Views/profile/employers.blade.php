@@ -19,7 +19,6 @@
                         </div>
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <select id="filter" name="filter" class="form-control" v-model="selected_filter">
-                                <option value="all">All</option>
                                 <option value="new">New Accounts</option>
                                 <option value="category">Business Category</option>
                                 <option value="city">City</option>
