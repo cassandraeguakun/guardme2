@@ -10,6 +10,7 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 <<<<<<< HEAD
+<<<<<<< HEAD
 .env
 public/build/
 ### Node template
@@ -143,3 +144,7 @@ fabric.properties
 =======
 .env
 >>>>>>> dennis
+=======
+.env
+public/build/
+>>>>>>> parent of ff9e991... job module updates -- hire button fixed
